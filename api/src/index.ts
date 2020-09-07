@@ -46,8 +46,6 @@ app.listen(port, () => {
     console.log(`App listening at https://plausiblereality.com`)
 })
 
-process.on('SIGTERM', () => {
-    
-    boltDriver.close()
-    
+process.on('SIGTERM', () => {    
+    boltDriver.close()    
 })

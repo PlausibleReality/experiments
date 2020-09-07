@@ -1,5 +1,5 @@
 {
-  "name": "experiments-server",
+  "name": "experiments-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
