@@ -1,10 +1,8 @@
-import styles from '../styles/Home.module.css'
-
 const API_URL = 'https://plausiblereality.com/api/'
 
 export default function Home({helloData}) {
   return (
-    <div className={styles.container}>      
+    <div>
       Coming soon, an experiment!
     </div>
   )
