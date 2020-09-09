@@ -1,19 +1,21 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { Grommet, Main, Sidebar, Box, List, Anchor } from 'grommet'
+import { Anchor, Grommet, Menu, Sidebar, Box, List, Nav, DropButton, AccordionPanel, Accordion, Button } from 'grommet'
 
-import { GrommetTheme } from './_theme'
+import { GrommetTheme } from '../theme'
+import { defaultMaxListeners } from 'stream'
+import { makeLink, ExperimentLinks, HomeLink, AboutLink } from '../links'
 
-type LinkInfo = {url: string, label: string}
-
-const links: LinkInfo[] = [
-  { url: '/', label: 'Home' },
-  { url: '/about', label: 'About' }
-]
+import { useState } from 'react'
 
 function MyApp({ Component, pageProps }) {
-  return <Grommet theme={GrommetTheme} full>
+
+  const [showExperiments, setShowExperiments] = useState<boolean>(false)
+  const router = useRouter()
+
+  return <Grommet theme={GrommetTheme as any} full>
     <Head>
       <title>Plausible Reality</title>
       <link rel="icon" href="/favicon.ico" />
@@ -23,14 +25,12 @@ function MyApp({ Component, pageProps }) {
     <Box fill>
       <Box direction="row" background="light-2" fill="vertical">
           <Sidebar background="light-1">
-            <List 
-              data = {links}
-              children = {(datum: LinkInfo, index) =>
-                <Link href={datum.url}><Anchor href={datum.url} label={datum.label}/></Link>
-              }
-            />          
+            <Nav>
+               {makeLink(HomeLink)}
+               {ExperimentLinks.map(makeLink)}
+               {makeLink(AboutLink)}
+            </Nav>
           </Sidebar>        
-
           <Component {...pageProps} />
         </Box>
     </Box>
