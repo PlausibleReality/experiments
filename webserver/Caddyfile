@@ -1,8 +1,45 @@
 plausiblereality.com
 
-reverse_proxy 127.0.0.1:3000
+@gz path *.gz
+@notGz not path *.gz
 
-route /api/* {
-	uri strip_prefix /api
-	reverse_proxy 127.0.0.1:3030
+# if requested, encode with gzip, as long as the file isn't already gzipped
+encode @notGz gzip
+
+# .gz are gzipped, regardless of whether or not the user requested gzip encoding
+route @gz {
+	header Content-Encoding gzip
+}
+
+@jsGz path *.js.gz
+
+# js.gz are javascript files
+route @jsGz {
+	header Content-Type application/javascript
+}
+
+@data path *.data.gz
+
+route @data {
+	header Content-Type application/octet-stream
+}
+
+@wasm path *.wasm.gz
+
+route @wasm {
+	header Content-Type application/wasm
+}
+
+route {
+	route /assets/* {		
+				
+		file_server		
+	}
+
+	route /api/* {
+		uri strip_prefix /api
+		reverse_proxy 127.0.0.1:3030
+	}
+
+	reverse_proxy 127.0.0.1:3000
 }
