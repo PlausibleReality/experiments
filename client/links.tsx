@@ -12,4 +12,4 @@ export const ExperimentLinks: LinkInfo[] = [
 ]
 
 export const makeLink = (info:LinkInfo) =>
-  <Link href={info.url}><Anchor href={info.url} label={info.label}/></Link>
+  <Link href={info.url} key={info.label}><Anchor href={info.url} label={info.label}/></Link>

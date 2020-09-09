@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
         </Box>
     </Box>
 
-    </Grommet>
+  </Grommet>
 }
 
 export default MyApp
