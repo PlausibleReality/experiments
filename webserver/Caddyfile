@@ -1,38 +1,37 @@
 plausiblereality.com
 
-@gz path *.gz
-@notGz not path *.gz
+### Pre-compressed gzip support
 
 # if requested, encode with gzip, as long as the file isn't already gzipped
+@notGz not path *.gz
 encode @notGz gzip
 
 # .gz are gzipped, regardless of whether or not the user requested gzip encoding
+@gz path *.gz
 route @gz {
 	header Content-Encoding gzip
 }
 
+# for extensions *.gz, add the appropriate content type
 @jsGz path *.js.gz
-
-# js.gz are javascript files
 route @jsGz {
 	header Content-Type application/javascript
 }
 
 @data path *.data.gz
-
 route @data {
 	header Content-Type application/octet-stream
 }
 
 @wasm path *.wasm.gz
-
 route @wasm {
 	header Content-Type application/wasm
 }
 
+### general site config
+
 route {
-	route /assets/* {		
-				
+	route /assets/* {				
 		file_server		
 	}
 
