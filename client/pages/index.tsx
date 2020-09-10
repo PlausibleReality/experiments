@@ -6,7 +6,7 @@ const API_URL = 'https://plausiblereality.com/api/'
 
 export default function Home({helloData}) {
   return (
-    <Box pad="medium">
+    <Box pad="medium" fill>
       <Paragraph>
         Check out an experiment:<br/>
         { ExperimentLinks.map(i => (

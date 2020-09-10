@@ -11,7 +11,7 @@ export default function ThreeTest() {
         { loading: () => <span>Loading Three Host</span> }
     )
 
-    return <Box>
+    return <Box fill>
         <ThreeHost></ThreeHost>
     </Box>
 }

@@ -45,7 +45,7 @@ export default function UnityTest() {
         document.body.appendChild(loaderScript)
     }
 
-    return <Box id="unity-container" className="unity-desktop" ref={e => e && loadUnity(e)}>
+    return <Box id="unity-container" className="unity-desktop" fill ref={e => e && loadUnity(e)}>
         <canvas id="unity-canvas"></canvas>
         <Button primary label="Fullscreen" onClick={() => unityInstance.current && unityInstance.current.SetFullscreen(1)}/>
     </Box>

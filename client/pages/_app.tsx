@@ -13,7 +13,7 @@ import { useState } from 'react'
 function MyApp({ Component, pageProps }) {
 
   const [showExperiments, setShowExperiments] = useState<boolean>(false)
-  const router = useRouter()
+  const router = useRouter()  
 
   return <Grommet theme={GrommetTheme as any} full>
     <Head>
@@ -22,16 +22,16 @@ function MyApp({ Component, pageProps }) {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />      
     </Head>
     
-    <Box fill>
-      <Box direction="row" background="light-2" fill="vertical">
-          <Sidebar background="light-1">
+    <Box fill="horizontal" height="100%">
+      <Box direction="row" background="light-2" height={{min: "100%"}} flex="grow">
+          <Sidebar background="light-1" flex="grow" fill="vertical">
             <Nav>
                {makeLink(HomeLink)}
                {ExperimentLinks.map(makeLink)}
                {makeLink(AboutLink)}
             </Nav>
-          </Sidebar>        
-          <Component {...pageProps} />
+          </Sidebar>   
+          <Component {...pageProps}/>
         </Box>
     </Box>
 
