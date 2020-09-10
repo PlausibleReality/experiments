@@ -1,4 +1,4 @@
-plausiblereality.com
+plausiblereality.com {
 
 ### Pre-compressed gzip support
 
@@ -41,4 +41,19 @@ route {
 	}
 
 	reverse_proxy 127.0.0.1:3000
+}
+
+}
+
+dev.plausiblereality.com {
+	route /assets/* {
+		file_server
+	}
+
+	route /api/* {
+		uri strip_prefix /api
+		reverse_proxy 127.0.0.1:3031
+	}
+
+	reverse_proxy 127.0.0.1:3001
 }
