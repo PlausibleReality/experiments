@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc --outDir ./dist-dev && node dist-dev/index.js -p 3031",
     "start": "tsc && node dist/index.js"
   },
   "author": "",
