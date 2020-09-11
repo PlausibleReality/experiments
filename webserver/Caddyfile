@@ -1,59 +1,69 @@
-plausiblereality.com {
-
 ### Pre-compressed gzip support
 
-# if requested, encode with gzip, as long as the file isn't already gzipped
-@notGz not path *.gz
-encode @notGz gzip
+(precompressedgzip) {
+	# if requested, encode with gzip, as long as the file isn't already gzipped
+	@notGz not path *.gz
+	encode @notGz gzip
 
-# .gz are gzipped, regardless of whether or not the user requested gzip encoding
-@gz path *.gz
-route @gz {
-	header Content-Encoding gzip
-}
+	# .gz are gzipped, regardless of whether or not the user requested gzip encoding
+	@gz path *.gz
+	route @gz {
+		header Content-Encoding gzip
+	}
 
-# for extensions *.gz, add the appropriate content type
-@jsGz path *.js.gz
-route @jsGz {
-	header Content-Type application/javascript
-}
+	# for extensions *.gz, add the appropriate content type
+	@jsGz path *.js.gz
+	route @jsGz {
+		header Content-Type application/javascript
+	}
 
-@data path *.data.gz
-route @data {
-	header Content-Type application/octet-stream
-}
+	@data path *.data.gz
+	route @data {
+		header Content-Type application/octet-stream
+	}
 
-@wasm path *.wasm.gz
-route @wasm {
-	header Content-Type application/wasm
+	@wasm path *.wasm.gz
+	route @wasm {
+		header Content-Type application/wasm
+	}
 }
 
 ### general site config
 
-route {
-	route /assets/* {				
-		file_server		
+plausiblereality.com {
+
+	import precompressedgzip
+
+	route {
+		route /assets/* {				
+			file_server		
+		}
+
+		route /api/* {
+			uri strip_prefix /api
+			reverse_proxy 127.0.0.1:3030
+		}
+
+		reverse_proxy 127.0.0.1:3000
 	}
 
-	route /api/* {
-		uri strip_prefix /api
-		reverse_proxy 127.0.0.1:3030
-	}
-
-	reverse_proxy 127.0.0.1:3000
 }
 
-}
-
+# dev site config
 dev.plausiblereality.com {
-	route /assets/* {
-		file_server
-	}
 
-	route /api/* {
-		uri strip_prefix /api
-		reverse_proxy 127.0.0.1:3031
-	}
+	import precompressedgzip
 
-	reverse_proxy 127.0.0.1:3001
+	route {
+		route /assets/* {				
+			file_server		
+		}
+
+		route /api/* {
+			uri strip_prefix /api
+			reverse_proxy 127.0.0.1:3031
+		}
+
+		reverse_proxy 127.0.0.1:3001
+	}
 }
