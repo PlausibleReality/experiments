@@ -2,13 +2,16 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 module.exports = (phase, { defaultConfig }) => {
     
-    const buildIn = distDir => ({
+    const build = (distDir, rootUrl) => ({
         ...defaultConfig,
-        distDir
+        distDir,
+        env: {
+            rootUrl
+        }
     })
 
     if (phase === PHASE_DEVELOPMENT_SERVER)
-        return buildIn('dev-build')
+        return build('dev-build', 'https://dev.plausiblereality.com')
 
-    return buildIn('release-build')
+    return build('release-build', 'https://plausiblereality.com')
 }

@@ -2,7 +2,7 @@
 import { Box, Paragraph } from 'grommet'
 import { ExperimentLinks, makeLink } from '../links'
 
-const API_URL = 'https://plausiblereality.com/api/'
+const API_URL = `${process.env.rootUrl}/api/`
 
 export default function Home({helloData}) {
   return (
