@@ -1,1 +1,1 @@
-pm2 start npm --name "next" -- run dev
+pm2 start npm --name "next.js dev" -- run dev -p 3001
