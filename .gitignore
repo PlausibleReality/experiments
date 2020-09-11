@@ -2,3 +2,4 @@ node_modules/
 dist/
 client/release-build
 client/dev-build
+api/dist-dev
